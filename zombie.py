@@ -16,10 +16,13 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 10.0
 
+
 animation_names = ['Walk']
 
 class Zombie:
     images = None
+
+    global body
 
     def load_images(self):
         if Zombie.images == None:
@@ -46,18 +49,19 @@ class Zombie:
 
 
     def draw(self):
+
         if self.dir < 0:
             Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
         else:
             Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
-        # draw_rectangle(*self.get_bb())
+        draw_rectangle(*self.get_bb())
 
 
     def handle_event(self, event):
         pass
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.x - 70, self.y - 50, self.x + 70, self.y + 50
 
     def handle_collision(self, group, other):
         if group == 'ball:zombie':
